@@ -5,4 +5,4 @@
 *Test.java
 **/test/
 logs
-sky-server/src/main/resources/.env
+.env*
