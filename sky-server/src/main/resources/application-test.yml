@@ -1,0 +1,17 @@
+sky:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: sky_take_out
+    username: root
+
+  redis:
+    host: localhost
+    password: 123456
+    port: 6379
+    database: 0
+
+  minoss:
+    endpoint: http://127.0.0.1:9000 #minio服务所在地址 API
+    bucket-name: sky-take-out #bucket名称

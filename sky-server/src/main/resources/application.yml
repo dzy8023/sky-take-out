@@ -1,0 +1,78 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    #来到根目录
+    import: optional:.env[.properties]
+  application:
+    name: sky-server
+  profiles:
+    active: test
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${sky.datasource.driver-class-name}
+      url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${sky.datasource.username}
+      password: ${MYSQL_PASSWORD}
+  redis:
+    host: ${sky.redis.host}
+    password: ${sky.redis.password}
+    port: ${sky.redis.port}
+    database: ${sky.redis.database}
+
+  aop:
+    proxy-target-class: true
+
+mybatis:
+  #mapper配置文件, 如果不配置，则mapper映射文件要同包同名
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sky.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      sky:
+        mapper: DEBUG
+        service: INFO
+        controller: INFO
+  file:
+    name: "logs/${spring.application.name}.log"
+
+sky:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: itcast
+    # 设置jwt过期时间
+    admin-ttl: 72000000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+
+    user-secret-key: itheima
+    user-ttl: 72000000
+    user-token-name: authentication
+
+  minoss:
+    endpoint: ${sky.minoss.endpoint}
+    access-key-id: ${MINOSS_ACCESS_KEY_ID}
+    access-key-secret: ${MINOSS_ACCESS_KEY_SECRET}
+    bucket-name: ${sky.minoss.bucket-name}
+
+
+  wechat:
+    appid: ${WECHAT_APPID}
+    secret: ${WECHAT_SECRET}
+
+  shop:
+    address: ${SHOP_ADDRESS}
+  baidu:
+    ak: ${BAIDU_AK}
+
+
+
+
